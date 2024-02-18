@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>
+                Resultado: <span class="resultado"></span>
+            </h2>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Valor 1</label>
+                        <input id="valor1" type="text">
+                    </div>
+                    <div>
+                        <label for="">Valor 2</label>
+                        <input id="valor2" type="text">
+                    </div>
+                    <div style="display: flex">
+                        <button id="btn-sumar" type="button">
+                            Sumar
+                        </button>
+                        <button id="btn-restar" type="button">
+                            Restar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    //Usando metodo Listener
+    //selectores para manipular los elementos del DOM
+    let valor1 = document.querySelector("#valor1");
+    let valor2 = document.querySelector("#valor2");
+    const btn_sumar = document.querySelector("#btn-sumar");
+    const btn_restar = document.querySelector("#btn-restar");
+    let resultado = document.querySelector(".resultado");
+
+    //funcion que valida el valor1 y valor2
+    function validar(valor1,valor2) {
+        let pasamosLaValidacion = true; // inicializa el interruptor para validacion true o false
+        let validacionNumero = /^[0-9]+$/; // patron para solo aceptar numeros
+        if (validacionNumero.test(valor1) === false||validacionNumero.test(valor2) === false) {
+            pasamosLaValidacion = false; 
+        };
+    return pasamosLaValidacion; // retorna este valor por tanto su contenido sale de la funcion
+    };
+    //Listener para sumar
+    btn_sumar.addEventListener("click", () => {    
+        resultado.innerHTML = ""; //limpiamos resultado   
+        // llamar a funcion validar valor 1 y valor2
+        let validacion = validar(valor1.value,valor2.value);
+        if(validacion == true) {
+            resultado.innerHTML = Number(valor1.value)+Number(valor2.value);
+        };    
+    });
+    //Listener para restar
+    btn_restar.addEventListener("click", () => {   
+        resultado.innerHTML = ""; //limpiamos resultado       
+        // llamar a funcion validar valor 1 y valor2
+        let validacion = validar(valor1.value,valor2.value);
+        if(validacion == true) {
+            let resta = Number(valor1.value)-Number(valor2.value);
+            if (resta>=0){resultado.innerHTML = resta;}
+            else{resultado.innerHTML = "0";};
+        };    
+    });
+    </script>
+</body>
+
+</html>

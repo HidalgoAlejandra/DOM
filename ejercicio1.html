@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    //selectores para manipular los elementos del DOM
+    //asigna el formulario a una variable
+    let form = document.getElementById( "formulario");
+
+    // funcion que limpia la linea de error y los campos
+    function limpiarErrores_y_Datos() {
+        document.querySelector(".resultado").innerHTML = "";
+        document.querySelector(".errorNombre").innerHTML = "";
+        document.querySelector(".errorAsunto").innerHTML = "";
+        document.querySelector(".errorMensaje").innerHTML = "";
+    };
+
+    //funcion que da mensaje de exito
+    function exito() { 
+        document.querySelector(".resultado").innerHTML = "Mensaje enviado con éxito";
+    };
+
+    //funcion que valida los datos del formulario
+    function validar(nombre,asunto,mensaje) {
+        let pasamosLaValidacion = true; // inicializa el interruptor para validacion true o false
+        let validacionTexto = /^[a-zA-Z\s]+$/; // patron para solo aceptar letras y espacios
+        //validamos el nombre
+        if (validacionTexto.test(nombre) === false) {
+            document.querySelector(".errorNombre").innerHTML = "El nombre es requerido"
+            pasamosLaValidacion = false; // cambia el interruptor de la validacion
+        };
+        //validamos el asunto
+        if (validacionTexto.test(asunto) === false) {
+            document.querySelector(".errorAsunto").innerHTML = "El asunto es requerido"
+            pasamosLaValidacion = false; // cambia el interruptor de la validacion
+        };
+        //validamos el mensaje
+        if (validacionTexto.test(mensaje) === false) {
+            document.querySelector(".errorMensaje").innerHTML = "El mensaje es requerido"
+            pasamosLaValidacion = false; // cambia el interruptor de la validacion
+        };
+    return pasamosLaValidacion; // retorna este valor por tanto su contenido sale de la funcion
+    };
+
+    //Usando Listener evaluamos el evento submit en la variable del formulario, se ejecuta funcion interna
+    form.addEventListener( "submit", function( event ) {
+        event.preventDefault(); // evitar comportamiento por defecto del formulario
+        limpiarErrores_y_Datos();
+    
+        //tomar los valores ingresados en cada input del formulario
+        let Nombre = document.querySelector("#nombre").value;
+        let Asunto = document.querySelector("#asunto").value;
+        let Mensaje = document.querySelector("#mensaje").value;
+    
+        // llamar a funcion validar para checar los 3 campos del formulario
+        let resultado = validar(Nombre,Asunto,Mensaje);
+    
+        // evaluar valor o resultado devuelto por la funcion validar
+        if(resultado == true) {
+            exito(); // solo es llamada si resultado es true
+        };  
+    });
+    </script>
+</body>
+
+</html>
