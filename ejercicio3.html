@@ -46,7 +46,7 @@
     //funcion que valida el valor1 y valor2
     function validar(valor1,valor2) {
         let pasamosLaValidacion = true; // inicializa el interruptor para validacion true o false
-        let validacionNumero = /^[0-9]+$/; // patron para solo aceptar numeros
+        let validacionNumero = /^\-?[0-9]+$/; // patron para solo aceptar numeros
         if (validacionNumero.test(valor1) === false||validacionNumero.test(valor2) === false) {
             pasamosLaValidacion = false; 
         };
